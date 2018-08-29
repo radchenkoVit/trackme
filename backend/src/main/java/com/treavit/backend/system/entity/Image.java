@@ -18,7 +18,7 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column(name = "image")
+    @Column(name = "image_data")
     private byte[] image;
 
     public Long getId() {
