@@ -1,11 +1,15 @@
 package com.treavit.backend.system.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.Arrays;
 
@@ -14,19 +18,25 @@ import java.util.Arrays;
 public class Image {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+//    @GeneratedValue(generator="gen")
+//    @GenericGenerator(name="gen", strategy="foreign", parameters=@Parameter(name="property", value="user"))
+    private Long userId;
 
     @Lob
     @Column(name = "image_data")
     private byte[] image;
 
-    public Long getId() {
-        return id;
+//    @OneToOne TODO: Taras, tries to link tables -> failed
+//    @PrimaryKeyJoinColumn
+//    private User user;
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public byte[] getImage() {
@@ -37,10 +47,18 @@ public class Image {
         this.image = image;
     }
 
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
     @Override
     public String toString() {
         return "Image{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }

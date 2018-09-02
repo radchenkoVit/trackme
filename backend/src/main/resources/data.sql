@@ -40,7 +40,6 @@ create table users_teams (
   user_id         BIGINT,
   team_id         BIGINT,
   CONSTRAINT users_teams_PK PRIMARY KEY (user_id, team_id),
-  CONSTRAINT users_teams_UQ UNIQUE (user_id, team_id),
   CONSTRAINT users_teams_users_FK FOREIGN KEY (user_id) REFERENCES users,
   CONSTRAINT users_teams_teams_FK FOREIGN KEY (team_id) REFERENCES teams
 );
@@ -49,7 +48,6 @@ create table users_roles (
   user_id         BIGINT,
   role_id         BIGINT,
   CONSTRAINT users_roles_PK PRIMARY KEY (user_id, role_id),
-  CONSTRAINT users_roles_UQ UNIQUE (user_id, role_id),
   CONSTRAINT users_roles_users_FK FOREIGN KEY (user_id) REFERENCES users,
   CONSTRAINT users_roles_roles_FK FOREIGN KEY (role_id) REFERENCES roles
 );

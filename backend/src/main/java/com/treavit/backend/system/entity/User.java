@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,7 +42,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     @LazyCollection(LazyCollectionOption.FALSE) // TODO: work?
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -48,10 +51,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
+//    @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+//    private Image image;
 
 
     public Long getId() {
@@ -110,13 +113,13 @@ public class User {
         this.roles = roles;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+//    public Image getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(Image image) {
+//        this.image = image;
+//    }
 
     @Override
     public String toString() {
